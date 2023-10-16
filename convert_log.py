@@ -5,7 +5,7 @@ import argparse
 import textwrap
 
 # NB Add necessary keywords to arrays
-calculation_array = ['spe', 'opt', 'ts']
+calculation_array = ['spe', 'opt', 'opt freq', 'ts']
 functional_array = ['wb97xd', 'b3lyp']
 basis_set_array = ['def2svp', 'def2tzvp']
 solvent_array = ['dichloromethane', 'dimethylformamide']
@@ -145,8 +145,6 @@ output_name = input("Name of Output file (Different to input!): ")
 # Reading Calculation Type
 if calculation_type == 'spe':
     calculation_type = ''
-elif calculation_type == 'opt':
-    calculation_type = 'opt freq'
 elif calculation_type == 'ts':
     calculation_type = 'opt=(calcfc,ts,noeigentest) freq'
 
