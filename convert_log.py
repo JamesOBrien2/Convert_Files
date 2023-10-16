@@ -78,7 +78,7 @@ with open(f'{file_name}', 'r') as file:
 i = 0
 j = 0
 
-#Reads the Input orientation information
+# Reads the Input orientation information
 for s in range(len(all_lines)):            
     if "Input orientation:" in all_lines[s]:
         start = s
@@ -126,7 +126,7 @@ if solvent not in solvent_array:
 charge_multiplicity = input("What's the charge & multiplicity?: ")
 
 
-#Pseudo Keyword
+# Pseudo Keyword
 pseudo = input("Pseudopotential? (y/n): ")
 if pseudo == 'y':
     pseudo_element = input("Which element?: ")
@@ -151,7 +151,7 @@ elif calculation_type == 'ts':
     calculation_type = 'opt=(calcfc,ts,noeigentest) freq'
 
 
-#Creating output file & inserting last geometry & all keywords
+# Creating output file & inserting last geometry & all keywords
 
 with open(f'{output_name}.com', 'w') as file:
     file.write(f'# {calculation_type} {functional}/{basis_set} scrf=(smd,solvent={solvent}) {pseudo_read}\n\n')
