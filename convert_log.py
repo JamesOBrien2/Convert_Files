@@ -16,6 +16,7 @@ element_array = [
     'Rb', 'Sr', 'Y', 'Zr', 'Nb', 'Mo', 'Tc', 'Ru', 'Rh', 'Pd', 'Ag', 'Cd', 'In', 'Sn', 'Sb', 'Te', 'I', 'Xe'
 ]
 element_dict = {'iodine': 'I', 'Iodine': 'I'}
+calculation_dict = {'spe': '', 'ts': 'opt=(calcfc,ts,noeigentest) freq'}
 
 # Help - with Improved Formatting 
 wrapped_calculation_types = textwrap.wrap(', '.join(calculation_array), width=60)
@@ -25,11 +26,11 @@ wrapped_solvents = textwrap.wrap(', '.join(solvent_array), width=60)
 wrapped_pseudo_elements = textwrap.wrap(', '.join(element_array), width=60)
 
 parser = argparse.ArgumentParser(description='Available Options for Inputs')
-parser.add_argument('-c', '--calculations', nargs='+', help='List of available calculations: {}'.format('\n'.join(wrapped_calculation_types)), required=True)
-parser.add_argument('-f', '--functionals', nargs='+', help='List of available functionals: {}'.format('\n'.join(wrapped_functionals)), required=True)
-parser.add_argument('-b', '--basis-sets', nargs='+', help='List of available basis sets: {}'.format('\n'.join(wrapped_basis_sets)), required=True)
-parser.add_argument('-s', '--solvents', nargs='+', help='List of available solvents: {}'.format('\n'.join(wrapped_solvents)), required=True)
-parser.add_argument('-p', '--pseudo', nargs='+', help='List of available atoms for pseudopotential: {}'.format('\n'.join(wrapped_pseudo_elements)), required=True)
+parser.add_argument('-c', '--calculations', nargs='+', help='List of available calculations: {}'.format('\n'.join(wrapped_calculation_types)))
+parser.add_argument('-f', '--functionals', nargs='+', help='List of available functionals: {}'.format('\n'.join(wrapped_functionals)))
+parser.add_argument('-b', '--basis-sets', nargs='+', help='List of available basis sets: {}'.format('\n'.join(wrapped_basis_sets)))
+parser.add_argument('-s', '--solvents', nargs='+', help='List of available solvents: {}'.format('\n'.join(wrapped_solvents)))
+parser.add_argument('-p', '--pseudo', nargs='+', help='List of available atoms for pseudopotential: {}'.format('\n'.join(wrapped_pseudo_elements)))
 
 args = parser.parse_args()
 
@@ -78,7 +79,7 @@ with open(f'{file_name}', 'r') as file:
 i = 0
 j = 0
 
-# Reads the Input orientation information
+#Reads the Input orientation information
 for s in range(len(all_lines)):            
     if "Input orientation:" in all_lines[s]:
         start = s
@@ -108,6 +109,7 @@ coordinates.sort(key=lambda coordinates: coordinates[0][0])
 calculation_type = input("Calculation Type?: ").lower()
 if calculation_type not in calculation_array:
     raise ValueError(f"{calculation_type} is not in calculation_array")
+calculation_type = calculation_dict.get(calculation_type, calculation_type)
 
 functional = input("What's the functional?: ").lower()
 if functional not in functional_array:
@@ -141,12 +143,6 @@ else:
     pseudo_read = ''
 
 output_name = input("Name of Output file (Different to input!): ")
-
-# Reading Calculation Type
-if calculation_type == 'spe':
-    calculation_type = ''
-elif calculation_type == 'ts':
-    calculation_type = 'opt=(calcfc,ts,noeigentest) freq'
 
 
 # Creating output file & inserting last geometry & all keywords
