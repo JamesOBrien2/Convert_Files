@@ -34,11 +34,6 @@ parser.add_argument('-p', '--pseudo', nargs='+', help='List of available atoms f
 
 args = parser.parse_args()
 
-print(args.functionals)
-print(args.basis_sets)
-print(args.solvents)
-print(args.pseudo)
-
 # File name check
 if len(sys.argv) > 1:
     file_name = sys.argv[1]
