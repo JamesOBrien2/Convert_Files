@@ -290,8 +290,12 @@ else:
     pseudo_read = ""
 if calculation_type == "spe":
     output_name = file_name[:-4] + "_spe.com"
-else:
-    output_name = input("Name of Output file (Different to input!): ")
+if calculation_type == "opt":
+    output_name = file_name[:-4] + "_opt.com"
+if calculation_type == "opt freq":
+    output_name = file_name[:-4] + "_opt_freq.com"
+if calculation_type == "ts":
+    output_name = file_name[:-4] + "_ts.com"
 
 
 # Creating output file & inserting last geometry & all keywords

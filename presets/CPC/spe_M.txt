@@ -5,3 +5,4 @@ dcm
 1 1
 y
 iodine
+output
