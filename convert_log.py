@@ -274,7 +274,6 @@ if solvent not in solvent_array:
 
 charge_multiplicity = input("What's the charge & multiplicity?: ").strip()
 
-
 # Pseudo Keyword
 pseudo = input("Pseudopotential? (y/n): ").strip()
 if pseudo == "y":
@@ -288,23 +287,15 @@ if pseudo == "y":
 else:
     pseudo_element = ""
     pseudo_read = ""
-if calculation_type == "spe":
-    output_name = file_name[:-4] + "_spe.com"
-if calculation_type == "opt":
-    output_name = file_name[:-4] + "_opt.com"
-if calculation_type == "opt freq":
-    output_name = file_name[:-4] + "_opt_freq.com"
-if calculation_type == "ts":
-    output_name = file_name[:-4] + "_ts.com"
 
 
 # Creating output file & inserting last geometry & all keywords
 
-with open(f"{output_name}.com", "w") as file:
+with open(f"{file_name}.com", "w") as file:
     file.write(
         f"# {calculation_type} {functional}/{basis_set} scrf=(smd,solvent={solvent}) {pseudo_read}\n\n"
     )
-    file.write(f"{output_name}\n\n")
+    file.write(f"{file_name}\n\n")
     file.write(f"{charge_multiplicity}\n")
     for coord in coordinates:
         coord_str = f"{coord[0]:<2} {coord[1][0]:>12.6f} {coord[1][1]:>12.6f} {coord[1][2]:>12.6f}"
