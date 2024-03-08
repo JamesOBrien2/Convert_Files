@@ -1,7 +1,0 @@
-opt
-wb97xd
-def2svp
-dcm
-1 1
-y
-iodine

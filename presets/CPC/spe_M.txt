@@ -1,7 +1,0 @@
-spe
-wb97xd
-def2tzvp
-dcm
-1 1
-y
-iodine
