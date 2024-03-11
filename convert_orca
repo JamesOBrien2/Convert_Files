@@ -70,14 +70,16 @@ elif args.conversion == 'rerun':
     # Find the line number where the coordinates start in the .inp file
     for i, line in enumerate(inp_lines):
         if '* xyz' in line:
-            start_xyz_line = i
+            start_xyz_line = i + 1
+        if line.strip() == '*':
+            end_xyz_line = i
 
     # Read the .xyz file
     with open(str(xyz_file), 'r') as xyz:
         xyz_lines = xyz.readlines()
 
     # Extract coordinates from the .xyz file
-    xyz_coords = [line.strip().split()[1:] for line in xyz_lines[2:]]
+    xyz_coords = [line.strip().split() for line in xyz_lines[2:]]
 
     # Generate new .inp file with updated coordinates
     new_inp_filename = inp_file.strip('.inp') + '_rerun.inp'
@@ -86,6 +88,8 @@ elif args.conversion == 'rerun':
             if i == start_xyz_line:
                 for coord in xyz_coords:
                     new_inp_file.write(f"{' '.join(coord)}\n")
+            elif i > start_xyz_line and i < end_xyz_line:
+                continue  # Skip writing coordinates from .inp file
             else:
                 new_inp_file.write(line)
 
